@@ -40,13 +40,31 @@
 (define (render ws)
   (place-image CAR (+ ws CAR-MIDDLE) (- HEIGHT-OF-WORLD CAR-MIDDLE)  BACKGROUND))
 
+(check-expect (render 0)
+              (place-image CAR (+ 0 CAR-MIDDLE) (- HEIGHT-OF-WORLD CAR-MIDDLE)  BACKGROUND))
+
+(check-expect (render 100)
+              (place-image CAR (+ 100 CAR-MIDDLE) (- HEIGHT-OF-WORLD CAR-MIDDLE)  BACKGROUND))
+
+
+
 ; WorldState -> WorldState
 ; adds 3 to x to move the car right 
 (define (tock ws)
   (+ ws 3))
 
+(check-expect (tock 50) 53)
+
+(check-expect (tock 0) 3)
+
+;WorldState -> boolean
+;determine if the program must end
 (define (end? ws)
   (> ws WIDTH-OF-WORLD))
+
+(check-expect (end? 0) #false)
+(check-expect (end? 100) #false)
+(check-expect (end? 201) #true)
 
 
 ; WorldState -> WorldState
